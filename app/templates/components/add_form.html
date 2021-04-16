@@ -1,0 +1,19 @@
+<form action="/" method="POST">
+  <div class="form-row">
+    <div class="col-sm-5 my-1">
+      <label for="new_patient" class="sr-only">New Patient:</label>
+      <input type="text" class="form-control" name="name" id="new_patient" placeholder="Enter Patient Name">
+    </div>
+    <div class="col-sm-5 my-1">
+      <label for="hospital_id" class="sr-only">Hospital:</label>
+      <select class="form-control" name="hospital_id" id="hospital_id">
+      {% for hospital in hospitals %}
+      <option value="{{ hospital.id }}">{{ hospital.name }}</option>
+      {% endfor %}
+      </select>
+    </div>
+    <div class="col-sm-2 my-1">
+      <button type="submit" class="btn btn-primary btn-block">Add</button>
+    </div>
+  </div>
+</form>

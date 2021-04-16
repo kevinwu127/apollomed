@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <h1 class="my-4">Patient Hospital Simple CRUD</h1>
+  {% include 'components/add_form.html' %}
+  <br />
+  {% if patients|length < 1 %}
+  <p>No Patients</p>
+  {% else %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Patient</th>
+        <th>Hospital</th>
+        <th>Date Added</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for patient in patients %}
+      <tr>
+        <td><a href="/update/{{ patient.id }}">{{ patient.name }}</a></td>
+        <td>{{ hospitals[patient.hospital_id - 1].name }}</td>
+        <td>{{ patient.created_at.date() }}</td>
+        <td class="text-right"><a class="btn btn-danger btn-sm" href="/delete/{{ patient.id }}" role="button">Delete</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</div>
+{% endblock content %}
