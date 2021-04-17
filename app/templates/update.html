@@ -5,14 +5,21 @@
   <h1 class="my-4">Update Data</h1>
   <form action="/update/{{ patient.id }}" method="POST">
     <div class="form-row">
-      <div class="col-sm-5 my-1">
-        <input type="text" class="form-control" name="name" value="{{ patient.name }}">
+      <div class="col-sm-4 my-1">
+        <input type="text" class="form-control" name="first_name" value="{{ patient.first_name }}">
       </div>
-      <div class="col-sm-5 my-1">
+      <div class="col-sm-4 my-1">
+        <input type="text" class="form-control" name="last_name" value="{{ patient.last_name }}">
+      </div>
+      <div class="col-sm-2 my-1">
         <label for="hospital_id" class="sr-only">Hospital:</label>
         <select class="form-control" name="hospital_id" id="hospital_id">
-        {% for hospital in hospitals %}
-        <option value="{{ hospital.id }}">{{ hospital.name }}</option>
+        {% for hs in hospitals %}
+          {% if hs.id == hospital.id %}
+            <option selected value="{{ hs.id }}">{{ hs.name }}</option>
+          {% else %}
+            <option value="{{ hs.id }}">{{ hs.name }}</option>
+          {% endif %}
         {% endfor %}
         </select>
       </div>

@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect
+import urllib.parse
 
 from app import app
 from app.models import db, Patient, Hospital
@@ -6,9 +7,10 @@ from app.models import db, Patient, Hospital
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        name = request.form['name']
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
         hospital_id = request.form['hospital_id']
-        new_patient = Patient(name=name, hospital_id=hospital_id)
+        new_patient = Patient(first_name=first_name,last_name=last_name, hospital_id=hospital_id)
 
         try:
             db.session.add(new_patient)
@@ -20,7 +22,7 @@ def index():
     else:
         patients = Patient.query.order_by(Patient.created_at.desc()).all()
         hospitals = Hospital.query.order_by(Hospital.id).all()
-        return render_template('index.html', patients=patients, hospitals=hospitals)
+        return render_template('index.html', patients=patients, hospitals=hospitals, urllib=urllib.parse)
 
 @app.route('/delete/<int:id>')
 def delete(id):
@@ -36,9 +38,11 @@ def delete(id):
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
 def update(id):
     patient = Patient.query.get_or_404(id)
+    hospital = Hospital.query.get_or_404(patient.hospital_id)
 
     if request.method == 'POST':
-        patient.name = request.form['name']
+        patient.first_name = request.form['first_name']
+        patient.last_name = request.form['last_name']
         patient.hospital_id = request.form['hospital_id']
 
         try:
@@ -50,4 +54,4 @@ def update(id):
     else:
         title = "Update Data"
         hospitals = Hospital.query.order_by(Hospital.id).all()
-        return render_template('update.html', title=title, patient=patient, hospitals=hospitals)
+        return render_template('update.html', title=title, patient=patient, hospital=hospital, hospitals=hospitals)

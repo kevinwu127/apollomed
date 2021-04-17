@@ -2,7 +2,9 @@
 
 {% block content %}
 <div class="container">
-  <h1 class="my-4">Patient Hospital Simple CRUD</h1>
+  <h1 class="my-4">Patient Management Portal</h1>
+  <br />
+  <h3 class="my-4">Add a new Patient</h3>
   {% include 'components/add_form.html' %}
   <br />
   {% if patients|length < 1 %}
@@ -11,8 +13,10 @@
   <table class="table">
     <thead>
       <tr>
+        <th>Patient ID</th>
         <th>Patient</th>
         <th>Hospital</th>
+        <th>Address</th>
         <th>Date Added</th>
         <th></th>
       </tr>
@@ -20,8 +24,10 @@
     <tbody>
       {% for patient in patients %}
       <tr>
-        <td><a href="/update/{{ patient.id }}">{{ patient.name }}</a></td>
+        <td>{{ patient.id }}</td>
+        <td><a href="/update/{{ patient.id }}">{{ patient.first_name + ' ' + patient.last_name }}</a></td>
         <td>{{ hospitals[patient.hospital_id - 1].name }}</td>
+        <td><a href="https://www.google.com/maps/search/?api=1&query={{ hospitals[patient.hospital_id - 1].address }}" target="_blank">{{ hospitals[patient.hospital_id - 1].address }}</a></td>
         <td>{{ patient.created_at.date() }}</td>
         <td class="text-right"><a class="btn btn-danger btn-sm" href="/delete/{{ patient.id }}" role="button">Delete</a></td>
       </tr>

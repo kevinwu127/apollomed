@@ -1,15 +1,18 @@
 <form action="/" method="POST">
   <div class="form-row">
-    <div class="col-sm-5 my-1">
-      <label for="new_patient" class="sr-only">New Patient:</label>
-      <input type="text" class="form-control" name="name" id="new_patient" placeholder="Enter Patient Name">
+    <div class="col-sm-4 my-1">
+      <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Enter Patient First Name">
     </div>
-    <div class="col-sm-5 my-1">
+    <div class="col-sm-4 my-1">
+      <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Enter Patient Last Name">
+    </div>
+    <div class="col-sm-2 my-1">
       <label for="hospital_id" class="sr-only">Hospital:</label>
-      <select class="form-control" name="hospital_id" id="hospital_id">
-      {% for hospital in hospitals %}
-      <option value="{{ hospital.id }}">{{ hospital.name }}</option>
-      {% endfor %}
+      <select class="form-control" name="hospital_id" id="hospital_id" placeholder="Select Hospital">
+        <option value="" disabled selected>Select Hospital</option>
+        {% for hospital in hospitals %}
+        <option value="{{ hospital.id }}">{{ hospital.name }}</option>
+        {% endfor %}
       </select>
     </div>
     <div class="col-sm-2 my-1">
