@@ -6,14 +6,14 @@
   <form action="/update/{{ patient.id }}" method="POST">
     <div class="form-row">
       <div class="col-sm-4 my-1">
-        <input type="text" class="form-control" name="first_name" value="{{ patient.first_name }}">
+        <input type="text" class="form-control" name="first_name" value="{{ patient.first_name }}" required>
       </div>
       <div class="col-sm-4 my-1">
-        <input type="text" class="form-control" name="last_name" value="{{ patient.last_name }}">
+        <input type="text" class="form-control" name="last_name" value="{{ patient.last_name }}" required>
       </div>
       <div class="col-sm-2 my-1">
         <label for="hospital_id" class="sr-only">Hospital:</label>
-        <select class="form-control" name="hospital_id" id="hospital_id">
+        <select class="form-control" name="hospital_id" id="hospital_id" required>
         {% for hs in hospitals %}
           {% if hs.id == hospital.id %}
             <option selected value="{{ hs.id }}">{{ hs.name }}</option>

@@ -1,14 +1,14 @@
 <form action="/" method="POST">
   <div class="form-row">
     <div class="col-sm-4 my-1">
-      <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Enter Patient First Name">
+      <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Enter Patient First Name" required>
     </div>
     <div class="col-sm-4 my-1">
-      <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Enter Patient Last Name">
+      <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Enter Patient Last Name" required>
     </div>
     <div class="col-sm-2 my-1">
       <label for="hospital_id" class="sr-only">Hospital:</label>
-      <select class="form-control" name="hospital_id" id="hospital_id" placeholder="Select Hospital">
+      <select class="form-control" name="hospital_id" id="hospital_id" placeholder="Select Hospital" required>
         <option value="" disabled selected>Select Hospital</option>
         {% for hospital in hospitals %}
         <option value="{{ hospital.id }}">{{ hospital.name }}</option>

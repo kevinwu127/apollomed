@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request, redirect
-import urllib.parse
 
 from app import app
 from app.models import db, Patient, Hospital
 
+# Main POST function for adding patients
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -20,10 +20,12 @@ def index():
             return "There was a problem adding new stuff."
 
     else:
+        # Show all patients and hospital relationships
         patients = Patient.query.order_by(Patient.created_at.desc()).all()
         hospitals = Hospital.query.order_by(Hospital.id).all()
-        return render_template('index.html', patients=patients, hospitals=hospitals, urllib=urllib.parse)
+        return render_template('index.html', patients=patients, hospitals=hospitals)
 
+# Delete entry
 @app.route('/delete/<int:id>')
 def delete(id):
     patient = Patient.query.get_or_404(id)
@@ -35,6 +37,7 @@ def delete(id):
     except:
         return "There was a problem deleting data."
 
+# Update Patient Info
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
 def update(id):
     patient = Patient.query.get_or_404(id)
